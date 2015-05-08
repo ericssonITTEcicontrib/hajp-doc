@@ -140,28 +140,94 @@ deployment involves at least 1-2 Hot Standby Jenkins instances to eliminate pote
 <p>By Global Configuration, we mean configuration elements that belong to Jenkins core only and are
 replicable via file transfer and reload. </p>
 
-<p>Full list is here:
-| Element        | Result       | 
-| ------------- |:-------------:|
-| Workspace Root Directory      | OK      |
-| System Message | OK      |
-| # of executors | OK      |
-| Labels | OK      |
-| Usage | OK      |
-| Quiet period | OK      |
-| SCM checkout retry count | OK      |
-| Restrict project naming (all fields) | OK      |
-| Environment variables | OK      |
-| add tool locations | OK      |
-| Maven Configuration (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |
-| JDK (all fields) | OK      |</p>
+<p>Full list is here:</p>
+
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th align="center">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workspace Root Directory</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>System Message</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td># of executors</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Usage</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Quiet period</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>SCM checkout retry count</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Restrict project naming (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Environment variables</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>add tool locations</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>Maven Configuration (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+<tr>
+<td>JDK (all fields)</td>
+<td align="center">OK</td>
+</tr>
+</tbody>
+</table>
 
 <p>Any other configuration element on Manage Jenkins or configuration tabs can be assumed to
 require manual synchronization between Active Master and Hot Standby(s).</p>

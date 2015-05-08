@@ -102,6 +102,30 @@ Maintenance that require restart of master (core upgrade, plugin install/upgrade
 </ul>
 
 <h2>
+<a id="lexicon-" class="anchor" href="#lexicon-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lexicon <a name="Lexicon"></a>
+</h2>
+
+<h3>
+<a id="active-master-" class="anchor" href="#active-master-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Master <a name="ActiveMaster"></a>
+</h3>
+
+<p>Active Master (pronounciation /ˈaktiv 'mastər/) means a Jenkins Instance that is the real active instance
+build operations are taking place. </p>
+
+<p>With our current architecture, there can be ONLY ONE Active Master at any time in a HAJP cluster.</p>
+
+<h3>
+<a id="hot-standby-" class="anchor" href="#hot-standby-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hot Standby <a name="HotStandby"></a>
+</h3>
+
+<p>Hot Standby (pronounciation /hät ˈstan(d)ˌbī/) means a Jenkins Instance that can not instantiate or run
+build operations. It will receive synchronization from Active Master in the cluster and wait for a potential
+fail over scenario to occur, becoming Active Master if elected.</p>
+
+<p>With our current architecture, there can be many Hot Standby at any time in a HAJP cluster. Our recommended
+deployment involves at least 1-2 Hot Standby Jenkins instances to eliminate potential fail over errors.</p>
+
+<h2>
 <a id="architecture-" class="anchor" href="#architecture-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture <a name="Architecture"></a>
 </h2>
 

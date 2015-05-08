@@ -133,6 +133,39 @@ fail over scenario to occur, becoming Active Master if elected.</p>
 <p>With our current architecture, there can be many Hot Standby at any time in a HAJP cluster. Our recommended
 deployment involves at least 1-2 Hot Standby Jenkins instances to eliminate potential fail over errors.</p>
 
+<h3>
+<a id="global-configuration-" class="anchor" href="#global-configuration-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Global Configuration <a name="GlobalConfiguration"></a>
+</h3>
+
+<p>By Global Configuration, we mean configuration elements that belong to Jenkins core only and are
+replicable via file transfer and reload. </p>
+
+<p>Full list is here:
+| Element        | Result       | 
+| ------------- |:-------------:|
+| Workspace Root Directory      | OK      |
+| System Message | OK      |
+| # of executors | OK      |
+| Labels | OK      |
+| Usage | OK      |
+| Quiet period | OK      |
+| SCM checkout retry count | OK      |
+| Restrict project naming (all fields) | OK      |
+| Environment variables | OK      |
+| add tool locations | OK      |
+| Maven Configuration (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |
+| JDK (all fields) | OK      |</p>
+
+<p>Any other configuration element on Manage Jenkins or configuration tabs can be assumed to
+require manual synchronization between Active Master and Hot Standby(s).</p>
+
 <h2>
 <a id="architecture-" class="anchor" href="#architecture-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture <a name="Architecture"></a>
 </h2>

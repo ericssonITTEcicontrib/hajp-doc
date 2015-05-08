@@ -16,14 +16,14 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/danielyinanc/hajp-doc">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/ericssonITTEcicontrib/hajp-doc">View on GitHub</a>
 
           <h1 id="project_title">Hajp-doc</h1>
           <h2 id="project_tagline">HAJP Documentation</h2>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/danielyinanc/hajp-doc/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/danielyinanc/hajp-doc/tarball/master">Download this project as a tar.gz file</a>
+              <a class="zip_download_link" href="https://github.com/ericssonITTEcicontrib/hajp-doc/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ericssonITTEcicontrib/hajp-doc/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
@@ -36,8 +36,30 @@
 
 <p>High availability Jenkins plugin is an Ericsson open sourced product designed to make high availability Jenkins clustering a reality with fail over capabilities. Considering the complexity of Jenkins as a platform and critical nature of this plugin, we will implement the most stringent software development quality assurance protocols.</p>
 
+<p>Table of Contents</p>
+
+<ul>
+<li><p><a href="#BusinessRequirements">Business Requirements</a></p></li>
+<li>
+<p><a href="#Architecture">Architecture</a></p>
+
+<ul>
+<li><a href="#Configuration">Configuration</a></li>
+</ul>
+</li>
+<li><p><a href="#InstallationInstructions">Installation Instructions</a></p></li>
+<li>
+<p><a href="#UserGuide">User Guide</a></p>
+
+<ul>
+<li><a href="#DesignPrinciples">Design Principles</a></li>
+</ul>
+</li>
+</ul>
+
 <h2>
-<a id="business-requirements" class="anchor" href="#business-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Business Requirements</h2>
+<a id="business-requirements-" class="anchor" href="#business-requirements-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Business Requirements <a name="BusinessRequirements"></a>
+</h2>
 
 <p><b> Main requirement: transparent fail over if the Jenkins master becomes unavailable.</b></p>
 
@@ -72,14 +94,16 @@ Maintenance that require restart of master (core upgrade, plugin install/upgrade
 </ul>
 
 <h2>
-<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+<a id="architecture-" class="anchor" href="#architecture-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture <a name="Architecture"></a>
+</h2>
 
 <p>Jenkins is a distributed project build processing system at heart with quite a number of community and CloudBees developed plugins. As it grew overtime from its Hudson roots, Jenkins took an almost organic path making certain types of operations a breeze and other types of operations virtually impossible.</p>
 
 <p>HAJP 2.0 is built on a synchronized cluster with a single active master (referred as Leader) at any given time with many hot-standby masters and many slave instances.</p>
 
 <h3>
-<a id="principles" class="anchor" href="#principles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Principles</h3>
+<a id="design-principles-" class="anchor" href="#design-principles-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design Principles <a name="DesignPrinciples"></a>
+</h3>
 
 <ul>
 <li>No single point of failure</li>
@@ -88,13 +112,117 @@ Maintenance that require restart of master (core upgrade, plugin install/upgrade
 <li>Only synchronize what could be synchronized with zero failure</li>
 <li>Minimalist -- avoid accidental complexity</li>
 </ul>
+
+<h1>
+<a id="installation-instructions-" class="anchor" href="#installation-instructions-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation Instructions <a name="InstallationInstructions"></a>
+</h1>
+
+<p>Assuming a TOMCAT deployment, these jar files must be placed under TOMCAT/lib as managed dependencies for hpi to work correctly when built from a cloned repo instance.
+Otherwise these jars must be moved pre-packaging to hpi within TARGET folder.</p>
+
+<p>akka-actor_2.11-2.3.9.jar
+akka-cluster_2.11-2.3.9.jar
+akka-remote_2.11-2.3.9.jar
+hajp-common-1.0.5.jar
+config-1.2.1.jar
+netty-3.8.0.Final.jar
+protobuf-java-2.5.0.jar
+scala-library-2.11.5.jar
+slf4j-api-1.7.7.jar</p>
+
+<h1>
+<a id="user-guide-" class="anchor" href="#user-guide-" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Guide <a name="UserGuide"></a>
+</h1>
+
+<p>High Availability Jenkins Project is about creating a fail-over capable cluster of Jenkins instances with selective synchronization
+, monitoring and control capabilities.</p>
+
+<p>Configuration is described below with annotated images. First Jenkins instance to join the cluster becomes Active Master
+while all others become Hot Standby members. </p>
+
+<p>When a fail-over occurs, a new Active Master is elected from remaining Hot Standby members.</p>
+
+<p>a Vagrant file is provided for testing purposes... it needs Vagrant version &gt; 1.7.0 and VirtualBox of version 4.3 and above.
+<a href="https://raw.githubusercontent.com/danielyinanc/hajp-test/develop/functional/deploy/vagrant/Vagrantfile">VagrantFile</a></p>
+
+<p>All that is required for deployment (assuming Vagrant and VirtualBox is installed in the system) is to run the following 
+command at the same folder with Vagrantfile downloaded above</p>
+
+<pre><code>vagrant up
+</code></pre>
+
+<p>Vagrant installation tutorials: </p>
+
+<p><a href="http://code.tutsplus.com/tutorials/vagrant-what-why-and-how--net-26500">Tutsplus Tutorial</a>
+<a href="http://docs.vagrantup.com/v2/getting-started/">Vagrant Getting Started</a></p>
+
+<h2>
+<a id="configuration-" class="anchor" href="#configuration-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration <a name="Configuration"></a>
+</h2>
+
+<p>After launching the Jenkins instance, please click manage jenkins on left corner of screen.</p>
+
+<p><img src="http://i62.tinypic.com/25flv1l.jpg"></p>
+
+<p>HAJP-Settings button is among other buttons on the right side of the screen. </p>
+
+<p><img src="http://i61.tinypic.com/8wzc3s.jpg"></p>
+
+<p>This setup information is taken to match Vagrant file provided for testing purposes <a href="https://raw.githubusercontent.com/danielyinanc/hajp-test/develop/functional/deploy/vagrant/Vagrantfile">VagrantFile</a>. 
+Other than IP ranges, same configuration steps are applicable for any HAJP installation.</p>
+
+<h3>
+<a id="empty-settings-page-" class="anchor" href="#empty-settings-page-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Empty settings page <a name="EmptySettings"></a>
+</h3>
+
+<p><img src="http://i59.tinypic.com/x393jq.jpg"></p>
+
+<h3>
+<a id="ipfinder-output" class="anchor" href="#ipfinder-output" aria-hidden="true"><span class="octicon octicon-link"></span></a>ipFinder output</h3>
+
+<p>Use the following settings</p>
+
+<ul>
+<li>172.17.0.1 as Orchestrator IP</li>
+<li>172.17.0.2 as Core1 (port 9080)</li>
+<li>172.17.0.3 as Core2 (port 9081)</li>
+<li>For convenience please use port 2551 for all components.</li>
+</ul>
+
+<p><img src="http://i62.tinypic.com/2rnze4h.jpg"></p>
+
+<h3>
+<a id="jenkins-instance-1-port-9080-settings-filled" class="anchor" href="#jenkins-instance-1-port-9080-settings-filled" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jenkins Instance 1 (port 9080) Settings Filled</h3>
+
+<p><img src="http://i57.tinypic.com/s6p2xv.jpg"></p>
+
+<h3>
+<a id="jenkins-instance-2-port-9081-settings-filled" class="anchor" href="#jenkins-instance-2-port-9081-settings-filled" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jenkins Instance 2 (port 9081) Settings Filled</h3>
+
+<p><img src="http://i58.tinypic.com/2u4src1.jpg"></p>
+
+<h3>
+<a id="jenkins-instance-1-becomes-active-master" class="anchor" href="#jenkins-instance-1-becomes-active-master" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jenkins Instance 1 becomes Active Master</h3>
+
+<p>After the settings are entered, wait for about 10 seconds and reload 
+settings page to see Jenkins Instance 1 becoming Active Master.</p>
+
+<p><img src="http://i57.tinypic.com/20gla4o.jpg"></p>
+
+<h3>
+<a id="jenkins-instance-2-becomes-hot-standby" class="anchor" href="#jenkins-instance-2-becomes-hot-standby" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jenkins Instance 2 becomes Hot Standby</h3>
+
+<p>After the settings are entered, wait for about 10 seconds and reload 
+settings page to see Jenkins Instance 1 becoming Active Master.</p>
+
+<p><img src="http://i57.tinypic.com/2vhyarr.jpg"></p>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Hajp-doc maintained by <a href="https://github.com/danielyinanc">danielyinanc</a></p>
+        <p class="copyright">Hajp-doc maintained by <a href="https://github.com/ericssonITTEcicontrib">ericssonITTEcicontrib</a></p>
         <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>

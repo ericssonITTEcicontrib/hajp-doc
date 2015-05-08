@@ -239,7 +239,16 @@ settings page to see Jenkins Instance 1 becoming Active Master.</p>
 <a id="jenkins-instance-2-becomes-hot-standby" class="anchor" href="#jenkins-instance-2-becomes-hot-standby" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jenkins Instance 2 becomes Hot Standby</h3>
 
 <p>After the settings are entered, wait for about 10 seconds and reload 
-settings page to see Jenkins Instance 1 becoming Active Master.</p>
+settings page to see Jenkins Instance 2 becoming Hot Standby.</p>
+
+<p>Please note that first time this operation takes place, Jenkins instance
+will restart due to Hot Standby receiving keys and secrets from Active Master.
+Once restart is completed, you can repeat the operation and this time Jenkins
+Instance 2 becomes a Hot Standby.</p>
+
+<p>This restart is due to a Jenkins limitation. Secrets, identities and keys are generated
+for each Jenkins instance during first start-up phase and must be synchronized (which requires
+a restart) for Hot Standby to act like Active Master when fail over occurs.</p>
 
 <p><img src="http://i57.tinypic.com/2vhyarr.jpg"></p>
       </section>
